@@ -143,7 +143,7 @@ SAP API Business Hub における API サービス のうちの 殆どの API �
 v1.X.X のバージョンであるAPIサービスのデータレイアウト（=responses）は、例えば、次の通りです。
 
 ```
-type PartnerFunction struct {
+type HeaderPartner struct {
 	D struct {
 		Results []struct {
 			Metadata struct {
@@ -151,14 +151,20 @@ type PartnerFunction struct {
 				URI  string `json:"uri"`
 				Type string `json:"type"`
 			} `json:"__metadata"`
-			SDDocument           string `json:"SDDocument"`
-			PartnerFunction      string `json:"PartnerFunction"`
-			Customer             string `json:"Customer"`
-			Supplier             string `json:"Supplier"`
+			AddressID                     string `json:"AddressID"`
+			Customer                      string `json:"Customer"`
+			PartnerFunction               string `json:"PartnerFunction"`
+			SDDocument                    string `json:"SDDocument"`
+			SDDocumentItem                string `json:"SDDocumentItem"`
+			Supplier                      string `json:"Supplier"`
+			ToPartnerAddress              struct {
+				Deferred struct {
+					URI string `json:"uri"`
+				} `json:"__deferred"`
+			} `json:"to_Address"`
 		} `json:"results"`
 	} `json:"d"`
 }
-
 
 ```
 
@@ -166,7 +172,7 @@ type PartnerFunction struct {
 本レポジトリ内の一部のAPIのデータレイアウトを含む、v2.X.X のバージョンである API サービスのデータレイアウト（=responses）は、次の通りです。  
 ここで言う本レポジトリ内の一部のAPIのデータレイアウトには、PartnerAddressが含まれ、  
 本レポジトリ内の他のデータレイアウトは、v1.X.X と同様のデータレイアウトとなっています。
-（つまり、本レポジトリ内においても、現時点でv2.X.X のデータレイアウトを踏襲しているのは、PartnerAddress のみで、Header、PartnerFunction、Item、などのAPIでは、v1.X.X と同様のデータレイアウトとなっています）  
+（つまり、本レポジトリ内においても、現時点でv2.X.X のデータレイアウトを踏襲しているのは、PartnerAddress のみで、Header、HeaderPartner、PartnerAddress、Item、などのAPIでは、v1.X.X と同様のデータレイアウトとなっています）  
 
 ```
 type PartnerAddress struct {
